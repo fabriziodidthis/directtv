@@ -156,7 +156,6 @@ export async function resetPasswordHandler(
   // user.passwordResetCode - does this user has a password reset code pending?
   // user.passwordResetCode !== passwordResetCode - if the code entered does not match with the code sent
   if(!user || !user.passwordResetCode || user.passwordResetCode !== passwordResetCode){
-    console.log(user , user.passwordResetCode, passwordResetCode, id)
     return response.status(400).json({
       message: 'Something went wrong to reset this user password.',
       user:user ,
@@ -179,33 +178,3 @@ export async function resetPasswordHandler(
     message: 'Password has been changed successfully'
   })
 }
-
-
-/*
-export async function resetPasswordHandler(
-  req: Request<ResetPasswordInput["params"], {}, ResetPasswordInput["body"]>,
-  res: Response
-) {
-  const { id, passwordResetCode } = req.params;
-
-  const { password } = req.body;
-
-  const user = await findUserByID(id);
-
-  if (
-    !user ||
-    !user.passwordResetCode ||
-    user.passwordResetCode !== passwordResetCode
-  ) {
-    return res.status(400).send("Could not reset user password");
-  }
-
-  user.passwordResetCode = null;
-
-  user.password = password;
-
-  await user.save();
-
-  return res.send("Successfully updated password");
-}
-*/
