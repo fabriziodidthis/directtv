@@ -11,15 +11,6 @@ enum enumPhoneNumberType {
   BUSINESS = 'business'
 }
 
-class PhoneNumber {
-  @prop()
-  areaCode: string
-
-  @prop()
-  phone: string
-
-}
-
 // Handling the password
 @pre<User>('save',  async function(){
   if(!this.isModified('password')){
@@ -32,7 +23,7 @@ class PhoneNumber {
   return
 })
 
-// Slicing the phoneNumber and assigning to its corresponding variable
+// Sanitizing, slicing the phoneNumber and assigning to theirs corresponding variables
 @pre<User>('save', function(){
   this.areaCode = this.phoneNumber.replace(/\D/g,'').trim().slice(0,2)
   this.number = this.phoneNumber.replace(/\D/g,'').trim().slice(2)
