@@ -30,7 +30,7 @@ or
 yarn dev
 ```
 
- you can test it using importing the Insomnia JSON file from this repo.
+And now, you can test it using importing the Insomnia JSON file from this repo.
 
 ## Proposal
 
