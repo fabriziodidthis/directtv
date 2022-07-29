@@ -27,9 +27,11 @@ export async function createUserHandler(request: Request<{}, {}, CreateUserInput
       `
     })
 
+    const { fullName, email, phones}  = user
+
     return response.status(201).json({
-      message: 'User created',
-      user
+      message: 'User has been created successfully',
+      fullName, email, phones
     })
   } catch (error: any) {
     // Unique constraint violated
