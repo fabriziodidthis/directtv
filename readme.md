@@ -1,13 +1,26 @@
-Proposal
-Time Frame
-Sign Up
-Sign In
-Search User
-Requirements
-Desirable Requirements
-Submission
+# Start the project
 
-# Proposal
+In order to start this project, first you will need to clone it in any folder of your choice
+
+```bash
+git clone https://github.com/fabriziodidthis/directtv.git
+```
+
+Then cd to this directory and install its dependencies
+
+```bash
+npm install
+```
+
+or simply
+
+```bash
+yarn
+```
+
+After installing all packages, you can test it using importing the Insomnia JSON file from this repo.
+
+## Proposal
 
 - Create a backend application that will expose a sing up/sign in RESTful API.
 - All endpoints must only accept and response JSONs. The server should return JSON
