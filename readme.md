@@ -18,7 +18,19 @@ or simply
 yarn
 ```
 
-After installing all packages, you can test it using importing the Insomnia JSON file from this repo.
+After installing all packages, you will need start the application using
+
+```bash
+npm run dev
+```
+
+or
+
+```bash
+yarn dev
+```
+
+ you can test it using importing the Insomnia JSON file from this repo.
 
 ## Proposal
 
