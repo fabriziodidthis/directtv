@@ -8,14 +8,13 @@ const enumPhoneNumberType = [
   "business",
 ] as const;
 
-const phoneSchema =  z.object({
-      DDD: z.string().max(2),
-      number: z.string().min(8),
-      phoneNumberType: z.string()
-    })
+const phoneSchema = z.object({
+  DDD: z.string().max(2),
+  number: z.string().min(8),
+  phoneNumberType: z.string(),
+});
 
-type phoneElement = z.infer<typeof phoneSchema>
-
+type phoneElement = z.infer<typeof phoneSchema>;
 
 export const createUserSchema = z.object({
   body: z
@@ -42,7 +41,7 @@ export const createUserSchema = z.object({
         .email("Invalid email address"),
       // phones: z.array(phoneSchema).refine((elements))
 
-      // phones: 
+      // phones:
       //   z.object({
       //     DDD: z.string().max(2),
       //     number: z.string().min(8),

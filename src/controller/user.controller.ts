@@ -1,4 +1,5 @@
 import {Request, Response} from 'express'
+import { RequiredPaths } from 'mongoose/types/inferschematype';
 import {randomUUID} from 'node:crypto'
 import { CreateUserInput, ForgotPasswordInput, ResetPasswordInput, VerifyUserInput } from '../schema/user.schema';
 import { createUser, findUserByEmail, findUserByID } from '../service/user.service';
@@ -9,7 +10,7 @@ import  sendEmail  from '../utils/mailer';
  * The main handler to create and validate the inputs to create an user
  * @param request takes the 'CreateUserInput' to validate the input
  * @param response 
- * @returns an email sent, a creation of an user or error
+ * @returns an email sent, the creation of an user or error on user creation
  */
 export async function createUserHandler(request: Request<{}, {}, CreateUserInput>, response: Response  ) {
   const body = request.body
@@ -27,6 +28,7 @@ export async function createUserHandler(request: Request<{}, {}, CreateUserInput
       `
     })
 
+    // Destructuting user private fields to omit them in the response
     const { fullName, email, phones}  = user
 
     return response.status(201).json({
@@ -161,7 +163,7 @@ export async function resetPasswordHandler(
     return response.status(400).json({
       message: 'Something went wrong to reset this user password.',
       user:user ,
-      resetCode: user.passwordResetCode, 
+      resetCode: user!.passwordResetCode, 
       passwordresetcode: passwordResetCode, 
       id: id
     })
@@ -179,4 +181,16 @@ export async function resetPasswordHandler(
   return response.status(200).json({
     message: 'Password has been changed successfully'
   })
+}
+
+/**
+ * Get the information from the current user
+ * @param request 
+ * @param response 
+ * @returns 
+ */
+export async function getCurrentUserHandler(request: Request, response: Response) {
+  const {password, phoneNumber, phoneNumberType, verificationCode, areaCode, number, ...userData } = response.locals.user
+  
+  return response.send(userData)
 }

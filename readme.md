@@ -34,7 +34,7 @@ And now, you can test it using importing the Insomnia JSON file from this repo.
 
 ## Proposal
 
-- Create a backend application that will expose a sing up/sign in RESTful API.
+- Create a backend application that will expose a signUp/signIn RESTful API.
 - All endpoints must only accept and response JSONs. The server should return JSON
 for endpoint not found cases as well.
 - The application must persist the data (see details in requirements).
@@ -48,7 +48,7 @@ for endpoint not found cases as well.
 
 ## Sign Up
 
-[ ] This endpoint must receive a user with the following fields:
+[x] This endpoint must receive a user with the following fields:
     [x] name
     [x] email
     [x] password
@@ -77,27 +77,27 @@ Here are the models:
   - [x] update_date: user's last update date
   - [ ] last_login: date of last login (in case of creation, it will be the same as
   creation)
-  - [ ] token: API access token (can be a GUID or a JWT)
+  - [x] token: API access token (can be a GUID or a JWT)
 
 - [x] If the e-mail already exists, it should return the error with the message "E-mail already exists".
-- [ ] The token must be persisted along with the user
+- [x] The token must be persisted along with the user
 
 ## Sign In
 
-- [ ] This endpoint will receive an object with email and password.
+- [x] This endpoint will receive an object with email and password.
 - [ ] If the email exists and a password is the same as the persisted password, return the same as the sign_up endpoint.
-- [ ] If the email does not exist, return an error with appropriate status plus the message "Invalid username and/or password"
+- [x] If the email does not exist, return an error with appropriate status plus the message "Invalid username and/or password"
 - [ ] If the email exists but the password does not match, return the appropriate status 401 plus the message "Invalid username and/or password"
 
 ## Search User
 
-- [ ] Calls to this endpoint must contain a header in the Authentication request with the value "Bearer {token}" where {token} is the value of the token passed in the creation or sign in of a user.
+- [x] Calls to this endpoint must contain a header in the Authentication request with the value "Bearer {token}" where {token} is the value of the token passed in the creation or sign in of a user.
 - [ ] If the token does not exist, return error with appropriate status with message "Not authorized".
-- [ ] If the token exists, search for the user by the user_id passed in the path and compare if the token in the model is equal to the token passed in the header.
+- [x ] If the token exists, search for the user by the user_id passed in the path and compare if the token in the model is equal to the token passed in the header.
 - [ ] If it is not the same token, return error with appropriate status and message "Not authorized"
-- [ ] If it's the same token, check if the last login was LESS than 30 minutes ago.
-- [ ] If not LESS than 30 minutes ago, return error with appropriate status with message "Invalid session".
-- [ ] If everything is ok, return the user.
+- [x] If it's the same token, check if the last login was LESS than 30 minutes ago.
+- [x] If not LESS than 30 minutes ago, return error with appropriate status with message "Invalid session".
+- [x] If everything is ok, return the user.
 
 ## Requirements
 

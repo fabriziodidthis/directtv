@@ -20,7 +20,6 @@ const validateResource = (schema: AnyZodObject) => (request:Request, response: R
       message: 'Some fields could not be validated',
       error: error.message
     })
-    // return response.status(400).send(error.errors)
   }
 }
 

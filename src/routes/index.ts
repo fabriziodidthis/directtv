@@ -1,16 +1,12 @@
-import express, {Request, Response} from 'express'
+import express from 'express'
 import user from './user.routes'
 import auth from './auth.routes'
+import health from './health.routes'
 
 const router = express.Router()
 
-router.get('/health', (request: Request, response: Response) => {
-  response.status(200).json({
-    message: 'Application up and running'
-  })
-})
-
 router.use(user)
 router.use(auth)
+router.use(health)
 
 export default router
