@@ -92,9 +92,9 @@ Here are the models:
 ## Search User
 
 - [x] Calls to this endpoint must contain a header in the Authentication request with the value "Bearer {token}" where {token} is the value of the token passed in the creation or sign in of a user.
-- [ ] If the token does not exist, return error with appropriate status with message "Not authorized".
-- [x ] If the token exists, search for the user by the user_id passed in the path and compare if the token in the model is equal to the token passed in the header.
-- [ ] If it is not the same token, return error with appropriate status and message "Not authorized"
+- [x] If the token does not exist, return error with appropriate status with message "Not authorized".
+- [x] If the token exists, search for the user by the user_id passed in the path and compare if the token in the model is equal to the token passed in the header.
+- [x] If it is not the same token, return error with appropriate status and message "Not authorized"
 - [x] If it's the same token, check if the last login was LESS than 30 minutes ago.
 - [x] If not LESS than 30 minutes ago, return error with appropriate status with message "Invalid session".
 - [x] If everything is ok, return the user.
