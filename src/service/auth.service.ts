@@ -7,8 +7,8 @@ export async function createSession({ userID }: { userID: string }) {
   return SessionModel.create({ user: userID });
 }
 
-const refreshTokenPrivateKey = process.env.REFRESH_TOKEN_PRIVATE_KEY
-const accessTokenPrivateKey = process.env.ACCESS_TOKEN_PRIVATE_KEY
+const refreshTokenPrivateKey = process.env.REFRESH_TOKEN_PRIVATE_KEY;
+const accessTokenPrivateKey = process.env.ACCESS_TOKEN_PRIVATE_KEY;
 
 export async function signRefreshToken({ userID }: { userID: string }) {
   const session = await createSession({
@@ -19,8 +19,9 @@ export async function signRefreshToken({ userID }: { userID: string }) {
     {
       session: session._id,
     },
-    refreshTokenPrivateKey, {
-      expiresIn: '30m'
+    refreshTokenPrivateKey,
+    {
+      expiresIn: "30m",
     }
   );
 
@@ -30,9 +31,13 @@ export async function signRefreshToken({ userID }: { userID: string }) {
 export function signAccessToken(user: DocumentType<User>) {
   const payload = user.toJSON();
 
-  const accessToken = signJWT(payload, accessTokenPrivateKey,{
-    expiresIn:'30m'
+  const accessToken = signJWT(payload, accessTokenPrivateKey, {
+    expiresIn: "30m",
   });
 
   return accessToken;
+}
+
+export async function findSessionById(id: string) {
+  return SessionModel.findById(id);
 }

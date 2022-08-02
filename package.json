@@ -2,6 +2,10 @@
   "name": "directtv",
   "description": "RESTful API for DirectTV NodeJS backend position",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.4.0",
+    "npm": "8.12.1"
+  },
   "main": "index.js",
   "license": "MIT",
   "author": {
@@ -24,7 +28,6 @@
     "dotenv": "^16.0.1",
     "express": "^5.0.0-alpha.8",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21",
     "mongoose": "^6.4.4",
     "nodemailer": "^6.7.7",
     "pino": "^8.1.0",

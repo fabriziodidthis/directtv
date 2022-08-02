@@ -87,7 +87,7 @@ Here are the models:
 - [x] This endpoint will receive an object with email and password.
 - [ ] If the email exists and a password is the same as the persisted password, return the same as the sign_up endpoint.
 - [x] If the email does not exist, return an error with appropriate status plus the message "Invalid username and/or password"
-- [ ] If the email exists but the password does not match, return the appropriate status 401 plus the message "Invalid username and/or password"
+- [x] If the email exists but the password does not match, return the appropriate status 401 plus the message "Invalid username and/or password"
 
 ## Search User
 
@@ -109,7 +109,7 @@ Here are the models:
 
 ## Desirable Requirements
 
-- [ ] JWT as token
+- [x] JWT as token
 - [ ] Unit Tests
 - [ ] Non-reversible encryption (hash) on password and no token
 - [x] Mongo
