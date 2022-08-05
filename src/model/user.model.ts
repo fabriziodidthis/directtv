@@ -1,4 +1,4 @@
-import { DocumentType, getModelForClass, index, modelOptions, pre, prop, Severity, Ref } from "@typegoose/typegoose";
+import { DocumentType, getModelForClass, index, modelOptions, pre, prop, Severity, PropType } from "@typegoose/typegoose";
 import argo2 from "argon2";
 import mongoose from "mongoose";
 import { randomUUID } from 'node:crypto'
@@ -9,6 +9,19 @@ enum enumPhoneNumberType {
   TOLLFREE = 'tollfree',
   MOBILE = 'mobile',
   BUSINESS = 'business'
+}
+
+class PhonesNumbers {
+  @prop()
+  DDD: string
+
+  @prop()
+  number: string
+
+  @prop({
+    enum: enumPhoneNumberType,
+  })
+  phoneNumberType: enumPhoneNumberType
 }
 
 // Handling the password
@@ -23,17 +36,19 @@ enum enumPhoneNumberType {
   return
 })
 
-// Sanitizing, slicing the phoneNumber and assigning to theirs corresponding variables
+// Sanitizing, slicing phoneNumber and assigning to corresponding variables
 @pre<User>('save', function(){
-  this.areaCode = this.phoneNumber.replace(/\D/g,'').trim().slice(0,2)
-  this.number = this.phoneNumber.replace(/\D/g,'').trim().slice(2)
-  this.phoneNumber = this.phoneNumber.replace(/\D/g,'').trim()
-  const phoneObj = {
-    DDD: this.areaCode,
-    number: this.number,
+  const phoneObj: PhonesNumbers = {
+    DDD: this.phoneNumber.replace(/\D/g,'').trim().slice(0,2),
+    number: this.phoneNumber.replace(/\D/g,'').trim().slice(2),
     phoneNumberType: this.phoneNumberType
   }
   this.phones.push(phoneObj)
+})
+
+// Sanitizing phoneNumber
+@pre<User>('save', function(){
+  this.phoneNumber = this.phoneNumber.replace(/\D/g,'').trim()
 })
 
 @index({email: 1})
@@ -59,22 +74,22 @@ export class User {
   })
   fullName: string
 
-  @prop()
-  areaCode: string
-
-  @prop()
-  number: string
-
-  @prop()
+  @prop({
+    required: true
+  })
   phoneNumber:string
 
   @prop({
+    required: true,
     enum: enumPhoneNumberType
   })
   phoneNumberType: enumPhoneNumberType
-
-  @prop()
-  phones: mongoose.Types.Array<string>
+  
+  @prop({
+    type: () => [PhonesNumbers],
+    _id: false
+  })
+  phones: mongoose.Types.DocumentArray<object>
 
   @prop({
     required: true
@@ -86,7 +101,7 @@ export class User {
 
   @prop({
     required: true,
-    default: () => randomUUID()
+    default: () => randomUUID().slice(0,8)
   })
   verificationCode: string 
   
@@ -94,6 +109,11 @@ export class User {
     default: false
   })
   verifiedUser: boolean
+
+  @prop({
+    default: Date.now()
+  })
+  lastLogin: Date
 
   async validatePassword(this: DocumentType<User>, candidatePassword: string){
     try {

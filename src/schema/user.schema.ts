@@ -1,20 +1,4 @@
-// import {object, string, TypeOf, enum as zodEnum} from 'zod'
 import { z, TypeOf, string } from "zod";
-
-const enumPhoneNumberType = [
-  "landline",
-  "tollfree",
-  "mobile",
-  "business",
-] as const;
-
-const phoneSchema = z.object({
-  DDD: z.string().max(2),
-  number: z.string().min(8),
-  phoneNumberType: z.string(),
-});
-
-type phoneElement = z.infer<typeof phoneSchema>;
 
 export const createUserSchema = z.object({
   body: z
@@ -39,14 +23,13 @@ export const createUserSchema = z.object({
           invalid_type_error: "",
         })
         .email("Invalid email address"),
-      // phones: z.array(phoneSchema).refine((elements))
-
-      // phones:
-      //   z.object({
-      //     DDD: z.string().max(2),
-      //     number: z.string().min(8),
-      //     phoneNumberType: z.string()
-      //   }),
+      phoneNumber: z.string(),
+      phoneNumberType: z.enum([
+        "landline",
+        "tollfree",
+        "mobile",
+        "business",
+      ]),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
       message: "Passwords needs to be the same",

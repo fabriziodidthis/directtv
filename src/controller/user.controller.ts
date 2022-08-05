@@ -185,12 +185,12 @@ export async function resetPasswordHandler(
 
 /**
  * Get the information from the current user
- * @param request 
- * @param response 
- * @returns 
+ * @param request user info from the server
+ * @returns filtered fields to the response
  */
 export async function getCurrentUserHandler(request: Request, response: Response) {
-  const {password, phoneNumber, phoneNumberType, verificationCode, areaCode, number, ...userData } = response.locals.user
+  // const {password, phoneNumber, phoneNumberType, verificationCode, areaCode, number, ...userData } = response.locals.user
   
-  return response.send(userData)
+  return response.send(response.locals.user)
+  // return response.send({userData, phoneNumber})
 }

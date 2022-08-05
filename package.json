@@ -3,8 +3,8 @@
   "description": "RESTful API for DirectTV NodeJS backend position",
   "version": "1.0.0",
   "engines": {
-    "node": "18.4.0",
-    "npm": "8.12.1"
+    "node": "16.13.1",
+    "npm": "8.1.2"
   },
   "main": "index.js",
   "license": "MIT",
