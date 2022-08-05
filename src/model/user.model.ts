@@ -1,7 +1,7 @@
 import { DocumentType, getModelForClass, index, modelOptions, pre, prop, Severity, PropType } from "@typegoose/typegoose";
 import argo2 from "argon2";
 import mongoose from "mongoose";
-import { randomUUID } from 'node:crypto'
+import { randomInt } from 'node:crypto'
 import log from "../utils/logger";
 
 enum enumPhoneNumberType {
@@ -101,7 +101,7 @@ export class User {
 
   @prop({
     required: true,
-    default: () => randomUUID().slice(0,8)
+    default: () => randomInt(999999)
   })
   verificationCode: string 
   
